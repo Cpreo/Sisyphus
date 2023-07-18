@@ -11,11 +11,19 @@ Reformats text into colorful things
 
 */
 
-// sgo
 public class Log : MonoBehaviour
 {
+    private static Log instance;
+    // Do we only want to have one Log, it seems like in the future we may want 
+    // to have multiple logs for many different conversations in the game
+
     // Start is called before the first frame update
     // Text played up to this point
+
+    // Is a singleton the best option for this, this may end up being over-engineered lol, but whatever
+    public static Log GetInstance() {
+        return instance;
+    }
     string transcript;
     List<Item> cueItems;
     void Start()
@@ -28,6 +36,9 @@ public class Log : MonoBehaviour
         
     }
 
+    public string GetText() {
+        return transcript;
+    }
     public void UpdateLog(string newText){
         // adds new data to the log, called after the formatted text
         transcript += newText;

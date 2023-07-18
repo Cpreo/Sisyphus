@@ -11,7 +11,8 @@ public class Puzzle : MonoBehaviour
     List<Command> availableCommands;
     // These are the list of Commands that are active, and should be Drawn by Display
     List<Command> activeCommands;
-    
+    //List of commands that have been drawn
+    List<Command> drawnCommands;
     int player_health;
     int enemy_health;
 
@@ -30,7 +31,7 @@ public class Puzzle : MonoBehaviour
         
     }
 
-
+    // Possible Change: move the Add/Remove Ingredient functions to the PuzzleManager
     // Called by DisplayManager when item is dragged in
     public void AddIngredient(Item ingredient) {
         if( validItems.Contains(ingredient)) {
@@ -77,8 +78,24 @@ public class Puzzle : MonoBehaviour
 
     }
 
+
+    void Draw(){
+        // call displaymanager for each active command 
+        // how do we make sure there is no duplicates though?
+        foreach(Command active in activeCommands){
+            // Make sure commands are not in active ones
+            if(!drawnCommands.Contains(active)){
+            DisplayManager.GetInstance().AddCommand(active);
+            }
+            
+            drawnCommands.Add(active);
+        }
+    }
+
     // Called by the DisplayManager. Makes a choice based on the data
-    void UseCommand(Command command){
+    // Should this be in the DisplayManager? We may be able to have different types of puzzles
+    // later down the road....
+    public void UseCommand(Command command){
         Interpreter.GetInstance().MakeChoice(command.choiceNum);
 
     }

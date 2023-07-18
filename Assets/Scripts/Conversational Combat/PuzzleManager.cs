@@ -44,7 +44,9 @@ public class PuzzleManager : MonoBehaviour
         return instance;
     }
 
-
+    public Puzzle GetPuzzle(){
+        return activePuzzle;
+    }
     public void CreatePuzzle(Command[] commands)
     {
         isActive = true;
