@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Puzzle : MonoBehaviour
 {
-
-
     List<Item> validItems;
     // The list of total commands available to this puzzle, decides what can be drawn in
+    List<Item> currentIngredients;
+    // List of items currently in the crafting pool
     List<Command> availableCommands;
     // These are the list of Commands that are active, and should be Drawn by Display
     List<Command> activeCommands;
@@ -16,11 +16,16 @@ public class Puzzle : MonoBehaviour
     int player_health;
     int enemy_health;
 
-    // List of items currently in the crafting pool
-    List<Item> currentIngredients;
+    string hi;
 
 
-    public Puzzle(Command[] commands) {
+    public Puzzle(List<Command> commands) {
+        validItems = new List<Item>();
+        currentIngredients = new List<Item>();
+        availableCommands = new List<Command>();
+        activeCommands = new List<Command>();
+        drawnCommands = new List<Command>();
+        
         foreach(Command command in commands)
         {
             availableCommands.Add(command);
@@ -34,7 +39,7 @@ public class Puzzle : MonoBehaviour
     // Possible Change: move the Add/Remove Ingredient functions to the PuzzleManager
     // Called by DisplayManager when item is dragged in
     public void AddIngredient(Item ingredient) {
-        if( validItems.Contains(ingredient)) {
+        if( validItems.Contains(ingredient)) {// bounce back item if it is not valid by calling a different command
         currentIngredients.Add(ingredient);
         }
     }

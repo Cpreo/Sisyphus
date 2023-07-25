@@ -22,12 +22,15 @@ public class PuzzleManager : MonoBehaviour
 {
     private static PuzzleManager  instance;
 
-    List<Item> validItems;
     // The list of total commands available to this puzzle, decides what can be drawn in
  
     // Current Puzzle be played
     Puzzle activePuzzle = null;
 
+    //when we switch to reader mode we should clear the extracted commands. Maybe have a whole cleanup method
+
+    public List<Command> extractedCommands = new List<Command>();
+    public string hi = "hi";
     // Are we in puzzle mode? Important for DisplayManager, and Interpreter
     bool isActive = false;
     
@@ -47,10 +50,25 @@ public class PuzzleManager : MonoBehaviour
     public Puzzle GetPuzzle(){
         return activePuzzle;
     }
-    public void CreatePuzzle(Command[] commands)
+    //needs to parse puzzle from interpreter
+
+    public Command createCommand(int choiceNum, string name, List<string> currentTags){
+        List<Item> thisIngredients = new List<Item>();
+        foreach (string itemName in currentTags){
+            thisIngredients.Add(Item.itemDir[itemName]);
+        }
+
+        Command newCommand = (Command)ScriptableObject.CreateInstance(typeof (Command));
+        newCommand.CommandName = name;
+        newCommand.ingredients = thisIngredients;
+        newCommand.choiceNum = choiceNum;
+
+        return newCommand;
+    }
+    public void CreatePuzzle()
     {
         isActive = true;
-        activePuzzle = new Puzzle(commands);
+        activePuzzle = new Puzzle(extractedCommands);
     }
 
     // Hands the potato back to the interpreter, to continue on its merry way
@@ -58,6 +76,7 @@ public class PuzzleManager : MonoBehaviour
         // check if puzzle is in a fail or win state, and update accordingly
         isActive = false;
         activePuzzle = null;
+        extractedCommands = new List<Command>();
     }
     
 

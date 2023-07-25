@@ -66,11 +66,11 @@ public class Interpreter : MonoBehaviour
         }
     }
     // transcribes a puzzle from text into a list of commands that can be used in the puzzle
-    public Command[] FormatPuzzle(string transcriptPortion) {
-        Command[] commands = new Command[4];
-        // format commands;
-        return commands;
+    public void createCommand(int choiceNum, string name){
+        Command newCommand = PuzzleManager.GetInstance().createCommand(choiceNum, name, currentStory.currentTags);
+        PuzzleManager.GetInstance().extractedCommands.Add(newCommand);
     }
+    
     private void GetChoices()
     {
         // TODO: Send text to Log/ Diplay Manager

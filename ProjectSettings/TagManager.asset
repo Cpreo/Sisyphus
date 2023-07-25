@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Log Window
   - Item
+  - Inventory Slot
+  - Inventory item
+  - Crafting Window
   layers:
   - Default
   - TransparentFX
