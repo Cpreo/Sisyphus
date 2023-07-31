@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Case Log
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: c8b85058f6862f44cbabd58a18f0c3f5, type: 3}
-  hasIcon: 0
+  hasIcon: 1
   itemName: Case Log
   tooltext: 'Kills: 73 , Tobias is a controlling. manipulative serial killer who
     tries to gain control over conversations by turning them into a debate'
