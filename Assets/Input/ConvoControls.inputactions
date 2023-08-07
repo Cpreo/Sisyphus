@@ -1,0 +1,34 @@
+{
+    "name": "ConvoControls",
+    "maps": [
+        {
+            "name": "Convo",
+            "id": "419b16d9-7aec-474c-be42-383065a84d72",
+            "actions": [
+                {
+                    "name": "MousePosition",
+                    "type": "Value",
+                    "id": "e446856c-0f08-411e-8dd7-76aa1c9795c4",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b2219271-cd9e-4152-93ac-e7469bbab246",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MousePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

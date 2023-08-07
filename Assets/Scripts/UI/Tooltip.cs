@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 [ExecuteInEditMode()]
 /*
 Tooltip: By Game Dev Guide
@@ -16,12 +17,17 @@ public class Tooltip : MonoBehaviour
     public TextMeshProUGUI headerField;
     public TextMeshProUGUI contentField;
     public LayoutElement layoutElement;
+    private ConvoControls convoControls;
 
     public int characterWrapLimit;
     public RectTransform rectTransform;
-    void Awake(){
+    void Awake()
+    {
         rectTransform = GetComponent<RectTransform>();
 
+        //Creates an instance of the Input Action Controller to access mouse position
+        convoControls = new ConvoControls();
+        convoControls.Convo.Enable();
     }
     public void SetText(string content, string header = "")
     {
@@ -57,7 +63,9 @@ public class Tooltip : MonoBehaviour
 
         layoutElement.enabled = (headerLength > characterWrapLimit || contentLength > characterWrapLimit) ? true : false;
         }
-        Vector2 position = Input.mousePosition;
+
+        //Accesses Input from Input action instead of Input.mousePosition
+        Vector2 position = convoControls.Convo.MousePosition.ReadValue<Vector2>();
 
         float pivotX = position.x / Screen.width;
         float pivotY = position.y / Screen.height;
