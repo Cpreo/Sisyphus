@@ -44,6 +44,8 @@ public class CraftingCombat : MonoBehaviour
         }
     }
     public void AddItem(Item item) {
+
+        Debug.Log(PuzzleManager.GetInstance().hi);
         PuzzleManager.GetInstance().GetPuzzle().AddIngredient(item);
         Debug.Log("Item Added!");
     }

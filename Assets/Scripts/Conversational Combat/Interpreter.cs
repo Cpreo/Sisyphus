@@ -17,14 +17,8 @@ public class Interpreter : MonoBehaviour
     private Story currentStory;
     public bool dialogueIsPlaying;
     private static Interpreter instance;
-    
-    // list of current choices
     public List<Choice> currentChoices;
-    // Is there more text to add after calling the function
-    // TODO: potentially make function a bool
-    public bool continuing;
-    // doesn't need to be serializable
-    public string storyText;
+    bool continuing;
     private void Awake()
     {
         if(instance != null)
@@ -48,24 +42,18 @@ public class Interpreter : MonoBehaviour
     public void LoadStory(TextAsset inkJSON)
     {
         currentStory = new Story(inkJSON.text);
-        currentStory.ObserveVariable("commandCount", (string commandCount, object newVal) => {
-            createCommand(currentStory.variablesState["choiceNum"],currentStory.variablesState["commandName"]);
-        });
         dialogueIsPlaying = true;
-        ContinueStory();// This should probabally be in its own method
+        ContinueStory();
     }
     // Moves through the story and updates text with currentStory.Continue()
     // also switches the modes between puzzle and reader modes
-
-    public void ContinueStory()
+    private void ContinueStory()
     {
         if(currentStory.canContinue)
         {
             //TODO: Send text to Log and to DisplayManager
             //dialogueText.text = currentStory.Continue();
             // TODO: Call Puzzle Manager when certain symbols are reached
-            continuing = true;
-            storyText = currentStory.Continue();
             continuing = false;
             //TODO: Display choices available using Display Class
             //DisplayChoices();
@@ -78,11 +66,8 @@ public class Interpreter : MonoBehaviour
         }
     }
     // transcribes a puzzle from text into a list of commands that can be used in the puzzle
-    public void createCommand(object choiceNum, object commandName){
-
-        int numChoice = (int)choiceNum;
-        string name = (string)commandName;
-        Command newCommand = PuzzleManager.GetInstance().createCommand(numChoice, name, currentStory.currentTags);
+    public void createCommand(int choiceNum, string name){
+        Command newCommand = PuzzleManager.GetInstance().createCommand(choiceNum, name, currentStory.currentTags);
         PuzzleManager.GetInstance().extractedCommands.Add(newCommand);
     }
     
@@ -95,12 +80,4 @@ public class Interpreter : MonoBehaviour
         currentStory.ChooseChoiceIndex(choiceIndex);
         ContinueStory();
     }
-    //Handling Input, may have to alter later
-    public void Update(){
-        if(Input.GetKey(KeyCode.E))
-        {
-
-        }
-    }
-
 }

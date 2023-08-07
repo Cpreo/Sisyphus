@@ -21,18 +21,14 @@ public class Log : MonoBehaviour
     // Text played up to this point
 
     // Is a singleton the best option for this, this may end up being over-engineered lol, but whatever
-    
-    string transcript = "";
-    List<Item> cueItems;
-    private void Awake()
-    {
-        if(instance != null)
-        {
-        }
-        instance = this;
-    }
     public static Log GetInstance() {
         return instance;
+    }
+    string transcript;
+    List<Item> cueItems;
+    void Start()
+    {
+        
     }
     // Update is called once per frame
     void Update()

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc19a735906ce84d9290cba5788c23f, type: 3}
   m_Name: barnumStatement
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: c8b85058f6862f44cbabd58a18f0c3f5, type: 3}
+  icon: {fileID: 0}
   hasIcon: 0
   itemName: A Barnum Statement
   tooltext: '"You strike me as someone who prefers change and does not like to feel

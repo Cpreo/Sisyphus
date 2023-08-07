@@ -30,6 +30,7 @@ public class PuzzleManager : MonoBehaviour
     //when we switch to reader mode we should clear the extracted commands. Maybe have a whole cleanup method
 
     public List<Command> extractedCommands = new List<Command>();
+    public string hi = "hi";
     // Are we in puzzle mode? Important for DisplayManager, and Interpreter
     bool isActive = false;
     
