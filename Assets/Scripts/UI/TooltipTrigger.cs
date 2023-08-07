@@ -8,7 +8,7 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     // Start is called before the first frame update
     public string content;
     public string header;
-
+    // Get from item
     public void OnPointerEnter(PointerEventData eventData)
     {
         TooltipSystem.Show(content, header);
