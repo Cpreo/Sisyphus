@@ -4,6 +4,11 @@ using UnityEngine;
 //MAKE SURE TO ADD BOTTOM PART WHEN WORKING WITH INPUTS
 using UnityEngine.InputSystem;
 
+/**
+ * By: Ayo Popoola
+ * main Controller for movement in "Unconscious" sections of gameplay.
+ * Uses "playerControls" Input Action
+ */
 public class R_CharControl : MonoBehaviour
 {
     // Start is called before the first frame update
