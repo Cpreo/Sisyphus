@@ -28,8 +28,10 @@ Activates/Deactivates UI elements
     public GameObject portraits_window;
 
     public GameObject log_window;
-
+    private TextMeshProUGUI log_text;
     public GameObject chat;
+    private TextMeshProUGUI chat_text;
+
     public GameObject craft_window;
     public GameObject command_prefab;
     
@@ -52,11 +54,14 @@ Activates/Deactivates UI elements
     {
         return instance;
     }
-
+    
+    public void UpdateChat(string newText){
+        chat_text.text = newText;
+    }
 
     void Start()
     {
-        
+        chat_text = chat.GetComponentInChildren<TextMeshProUGUI>();
     }
     // Draws Log, Gets Text from Log class, as well as gets all of the clickable Text objects.
     // TODO: Should handle logic on dragging text from log into crafting window at later date. in displayManager?
@@ -70,6 +75,7 @@ Activates/Deactivates UI elements
     public void DrawInventory() {
         inventory_window.SetActive(true);
     }
+    // special IEnumerator method with text not appearing instantly
     public void DrawChat() {
         chat.SetActive(true);
     }
