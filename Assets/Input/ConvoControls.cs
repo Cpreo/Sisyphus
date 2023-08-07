@@ -35,6 +35,15 @@ public partial class @ConvoControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""91af561c-56cd-4460-8610-3145c5e3c61f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -48,6 +57,17 @@ public partial class @ConvoControls : IInputActionCollection2, IDisposable
                     ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""afd11ca6-2e52-43d9-8a31-7ce195cd0191"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -57,6 +77,7 @@ public partial class @ConvoControls : IInputActionCollection2, IDisposable
         // Convo
         m_Convo = asset.FindActionMap("Convo", throwIfNotFound: true);
         m_Convo_MousePosition = m_Convo.FindAction("MousePosition", throwIfNotFound: true);
+        m_Convo_Confirm = m_Convo.FindAction("Confirm", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -117,11 +138,13 @@ public partial class @ConvoControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Convo;
     private IConvoActions m_ConvoActionsCallbackInterface;
     private readonly InputAction m_Convo_MousePosition;
+    private readonly InputAction m_Convo_Confirm;
     public struct ConvoActions
     {
         private @ConvoControls m_Wrapper;
         public ConvoActions(@ConvoControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @MousePosition => m_Wrapper.m_Convo_MousePosition;
+        public InputAction @Confirm => m_Wrapper.m_Convo_Confirm;
         public InputActionMap Get() { return m_Wrapper.m_Convo; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -134,6 +157,9 @@ public partial class @ConvoControls : IInputActionCollection2, IDisposable
                 @MousePosition.started -= m_Wrapper.m_ConvoActionsCallbackInterface.OnMousePosition;
                 @MousePosition.performed -= m_Wrapper.m_ConvoActionsCallbackInterface.OnMousePosition;
                 @MousePosition.canceled -= m_Wrapper.m_ConvoActionsCallbackInterface.OnMousePosition;
+                @Confirm.started -= m_Wrapper.m_ConvoActionsCallbackInterface.OnConfirm;
+                @Confirm.performed -= m_Wrapper.m_ConvoActionsCallbackInterface.OnConfirm;
+                @Confirm.canceled -= m_Wrapper.m_ConvoActionsCallbackInterface.OnConfirm;
             }
             m_Wrapper.m_ConvoActionsCallbackInterface = instance;
             if (instance != null)
@@ -141,6 +167,9 @@ public partial class @ConvoControls : IInputActionCollection2, IDisposable
                 @MousePosition.started += instance.OnMousePosition;
                 @MousePosition.performed += instance.OnMousePosition;
                 @MousePosition.canceled += instance.OnMousePosition;
+                @Confirm.started += instance.OnConfirm;
+                @Confirm.performed += instance.OnConfirm;
+                @Confirm.canceled += instance.OnConfirm;
             }
         }
     }
@@ -148,5 +177,6 @@ public partial class @ConvoControls : IInputActionCollection2, IDisposable
     public interface IConvoActions
     {
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnConfirm(InputAction.CallbackContext context);
     }
 }

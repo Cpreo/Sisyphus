@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 /*
 DisplayManager
 By: Ore Popoola
@@ -40,6 +41,9 @@ public class DisplayManager : MonoBehaviour
         // will need to change depending on mode
         // note to self, should probabally do this stuff in phases so it is easier to test
         // I remember coding games in elementary school and with Tarang, what a jungle...
+
+        //Moved to Confirm function. Confirm funtion is called from Player Input component
+        /*
         if(Input.GetKeyDown(KeyCode.E) && Interpreter.GetInstance().continuing == false)
         {
             
@@ -57,7 +61,28 @@ public class DisplayManager : MonoBehaviour
             // We need to display the Log
             }
         }
+        */
 
+    }
+    public void Confirm(InputAction.CallbackContext context)
+    {
+        if (context.performed && !Interpreter.GetInstance().continuing)
+        {
+
+            // should probabally have a unified method for updating all elements
+            Interpreter.GetInstance().continuing = true;
+
+            if (Interpreter.GetInstance().continuing)
+            {
+                Interpreter.GetInstance().ContinueStory();
+                string storyText = Interpreter.GetInstance().storyText;
+                Display.GetInstance().UpdateChat(storyText);
+                // Need to get speaker tags
+                Log.GetInstance().UpdateLog(Interpreter.GetInstance().storyText);
+                Display.GetInstance().DrawLog();
+                // We need to display the Log
+            }
+        }
     }
 
  

@@ -96,11 +96,9 @@ public class Interpreter : MonoBehaviour
         ContinueStory();
     }
     //Handling Input, may have to alter later
-    public void Update(){
-        if(Input.GetKey(KeyCode.E))
-        {
-
-        }
+    public void Update()
+    {
+        
     }
 
 }
